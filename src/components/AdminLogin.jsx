@@ -8,18 +8,18 @@ export default function AdminLogin({ onLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      onLogin();
-    } catch (err) {
-      setError("Email o contraseña incorrectos.");
-      setLoading(false);
-    }
-  };
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError("");
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    onLogin();
+  } catch (err) {
+    setError("Email o contraseña incorrectos.");
+    setLoading(false);
+  }
+};
 
   return (
     <div style={{

@@ -3,7 +3,9 @@ import { collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc } from "fireb
 import { signOut } from "firebase/auth";
 import { db, auth } from "../firebase";
 
-export default function AdminPanel({ tenant }) {
+
+
+export default function AdminPanel({ tenant, onExit }) {
   const [tab, setTab] = useState("productos");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -25,9 +27,9 @@ export default function AdminPanel({ tenant }) {
       {/* HEADER */}
       <div style={{ background:"#1a1a1a", padding:"16px 20px", display:"flex", justifyContent:"space-between", alignItems:"center", borderBottom:"1px solid #2a2a2a" }}>
         <h1 style={{ fontSize:"18px", fontWeight:"800", color }}>{tenant.nombre} — Admin</h1>
-        <button onClick={() => signOut(auth)} style={{ background:"transparent", border:"1px solid #444", color:"#888", padding:"6px 12px", borderRadius:"8px", cursor:"pointer", fontSize:"13px" }}>
-          Cerrar sesión
-        </button>
+<button onClick={async () => { await signOut(auth); onExit(); }} style={{ background:"transparent", border:"1px solid #444", color:"#888", padding:"6px 12px", borderRadius:"8px", cursor:"pointer", fontSize:"13px" }}>
+  Cerrar sesión
+</button>
       </div>
 
       {/* TABS */}
