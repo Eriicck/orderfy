@@ -38,11 +38,20 @@ export function useTenant() {
         const ref = doc(db, "tenants", tenantId);
         const snap = await getDoc(ref);
 
-        if (snap.exists()) {
-          setTenant({ id: tenantId, ...snap.data() });
-        } else {
-          setError("Negocio no encontrado");
-        }
+if (snap.exists()) {
+  const data = snap.data();
+  if (data.activo === false) {
+    setError("inactivo");
+  } else {
+    setTenant({ id: tenantId, ...snap.data() });
+  }
+} else {
+  setError("404");
+}
+
+
+
+
       } catch (err) {
         setError("Error al cargar el negocio");
       } finally {
