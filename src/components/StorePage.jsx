@@ -57,14 +57,17 @@ export default function StorePage({ tenant }) {
           : filteredProducts.map(p => {
             const inCart = cartItems.find(i => i.id === p.id);
             return (
-              <div key={p.id} style={{
-                display:"flex", justifyContent:"space-between", alignItems:"center",
-                padding:"14px 0", borderBottom:"1px solid #2a2a2a"
-              }}>
-                <div>
-                  <div style={{ fontWeight:"600", fontSize:"15px" }}>{p.nombre}</div>
-                  {p.descripcion && <div style={{ fontSize:"12px", color:"#888", marginTop:"2px" }}>{p.descripcion}</div>}
-                </div>
+<div key={p.id} style={{
+  display:"flex", justifyContent:"space-between", alignItems:"center",
+  padding:"14px 0", borderBottom:"1px solid #2a2a2a", gap:"12px"
+}}>
+  <div style={{ flex:1 }}>
+    <div style={{ fontWeight:"600", fontSize:"15px" }}>{p.nombre}</div>
+    {p.descripcion && <div style={{ fontSize:"12px", color:"#888", marginTop:"2px" }}>{p.descripcion}</div>}
+  </div>
+  {p.imagen && (
+    <img src={p.imagen} style={{ width:"72px", height:"72px", objectFit:"cover", borderRadius:"10px", flexShrink:0 }} />
+  )}
                 <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
                   <span style={{ fontWeight:"800", fontSize:"16px", color }}>${p.precio?.toLocaleString('es-AR')}</span>
                   {inCart ? (
